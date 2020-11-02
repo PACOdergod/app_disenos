@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -6,18 +7,20 @@ class BotonesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          _fondo(),
-          _titulo(),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: ''),
-        BottomNavigationBarItem(icon: Icon(Icons.bubble_chart), label: ''),
-        BottomNavigationBarItem(icon: Icon(Icons.access_time), label: ''),
-      ]),
-    );
+        body: Stack(
+          children: <Widget>[
+            _fondo(),
+            SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  _titulo(),
+                  _botones(),
+                ],
+              ),
+            )
+          ],
+        ),
+        bottomNavigationBar: _navigation(context));
   }
 
   Widget _fondo() {
@@ -50,6 +53,11 @@ class BotonesPage extends StatelessWidget {
           child: rosa,
           top: -60,
           left: -50,
+        ),
+        Positioned(
+          child: rosa,
+          top: 400,
+          left: 50,
         )
       ],
     );
@@ -80,5 +88,70 @@ class BotonesPage extends StatelessWidget {
     );
   }
 
-  Widget _navigation() {}
+  Widget _navigation(context) {
+    return Theme(
+        data: Theme.of(context).copyWith(
+            canvasColor: Colors.indigo[300],
+            primaryColor: Colors.pinkAccent,
+            textTheme: Theme.of(context)
+                .textTheme
+                .copyWith(caption: TextStyle(color: Colors.grey))),
+        child: BottomNavigationBar(items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.bubble_chart), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.access_time), label: ''),
+        ]));
+  }
+
+  Widget _botones() {
+    return Table(
+      children: [
+        TableRow(children: [
+          _crearBoton('Alarma', Icons.access_alarm, Colors.blue),
+          _crearBoton('Hola', Icons.accessibility, Colors.purple),
+        ]),
+        TableRow(children: [
+          _crearBoton('Copo', Icons.ac_unit, Colors.blue[200]),
+          _crearBoton('Amigo', Icons.account_box, Colors.orange),
+        ]),
+        TableRow(children: [
+          _crearBoton('Android', Icons.adb, Colors.green),
+          _crearBoton('Foto', Icons.add_photo_alternate, Colors.yellow),
+        ]),
+      ],
+    );
+  }
+
+  Widget _crearBoton(String texto, IconData icono, Color color) {
+    return ClipRRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+        child: Container(
+          height: 180,
+          margin: EdgeInsets.all(15),
+          decoration: BoxDecoration(
+              color: Color.fromRGBO(62, 66, 107, 0.7),
+              borderRadius: BorderRadius.circular(20)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              CircleAvatar(
+                radius: 30,
+                backgroundColor: color,
+                child: Icon(
+                  icono,
+                  size: 30,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                texto,
+                style: TextStyle(color: color, fontSize: 20),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
