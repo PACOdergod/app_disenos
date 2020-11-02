@@ -8,9 +8,7 @@ class BasicoPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Image(
-                image: NetworkImage(
-                    'https://astelus.com/wp-content/viajes/Lago-Moraine-Parque-Nacional-Banff-Alberta-Canada.jpg')),
+            _imagen(),
             _descipcion(),
             _acciones(),
             _texto(),
@@ -19,6 +17,12 @@ class BasicoPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _imagen() {
+    return Image(
+        image: NetworkImage(
+            'https://astelus.com/wp-content/viajes/Lago-Moraine-Parque-Nacional-Banff-Alberta-Canada.jpg'));
   }
 
   Widget _descipcion() {

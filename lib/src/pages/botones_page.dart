@@ -15,7 +15,7 @@ class BotonesPage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   _titulo(),
-                  _botones(),
+                  _botones(context),
                 ],
               ),
             )
@@ -104,52 +104,70 @@ class BotonesPage extends StatelessWidget {
         ]));
   }
 
-  Widget _botones() {
+  Widget _botones(
+    BuildContext context,
+  ) {
     return Table(
       children: [
         TableRow(children: [
-          _crearBoton('Alarma', Icons.access_alarm, Colors.blue),
-          _crearBoton('Hola', Icons.accessibility, Colors.purple),
+          _crearBoton(context, 'basicoPage', Icons.access_alarm, Colors.blue),
+          _crearBoton(
+              context, 'scrollPage', Icons.accessibility, Colors.purple),
         ]),
         TableRow(children: [
-          _crearBoton('Copo', Icons.ac_unit, Colors.blue[200]),
-          _crearBoton('Amigo', Icons.account_box, Colors.orange),
+          _crearBoton(context, 'Copo', Icons.ac_unit, Colors.blue[200]),
+          _crearBoton(context, 'Amigo', Icons.account_box, Colors.orange),
         ]),
         TableRow(children: [
-          _crearBoton('Android', Icons.adb, Colors.green),
-          _crearBoton('Foto', Icons.add_photo_alternate, Colors.yellow),
+          _crearBoton(context, 'Android', Icons.adb, Colors.green),
+          _crearBoton(
+              context, 'Foto', Icons.add_photo_alternate, Colors.yellow),
         ]),
       ],
     );
   }
 
-  Widget _crearBoton(String texto, IconData icono, Color color) {
-    return ClipRRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
-        child: Container(
-          height: 180,
-          margin: EdgeInsets.all(15),
-          decoration: BoxDecoration(
-              color: Color.fromRGBO(62, 66, 107, 0.7),
-              borderRadius: BorderRadius.circular(20)),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              CircleAvatar(
-                radius: 30,
-                backgroundColor: color,
-                child: Icon(
-                  icono,
-                  size: 30,
-                  color: Colors.white,
+  Widget _crearBoton(context, String texto, IconData icono, Color color) {
+    List<String> textos = ['basicoPage', 'scrollPage'];
+    return GestureDetector(
+      onTap: () {
+        if (textos.contains(texto)) {
+          Navigator.pushNamed(context, texto);
+        } else {
+          Scaffold.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Hola, soy SnackBar"),
+            ),
+          );
+        }
+      },
+      child: ClipRRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+          child: Container(
+            height: 180,
+            margin: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+                color: Color.fromRGBO(62, 66, 107, 0.7),
+                borderRadius: BorderRadius.circular(20)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                CircleAvatar(
+                  radius: 30,
+                  backgroundColor: color,
+                  child: Icon(
+                    icono,
+                    size: 30,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              Text(
-                texto,
-                style: TextStyle(color: color, fontSize: 20),
-              )
-            ],
+                Text(
+                  texto,
+                  style: TextStyle(color: color, fontSize: 20),
+                )
+              ],
+            ),
           ),
         ),
       ),

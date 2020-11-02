@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
       title: 'Diseños',
       initialRoute: BotonesPage.routName,
       routes: {
-        BasicoPage.routName: (BuildContext context) => BasicoPage(),
-        ScrollPage.routName: (BuildContext context) => ScrollPage(),
-        BotonesPage.routName: (BuildContext context) => BotonesPage(),
+        'basicoPage': (BuildContext context) => BasicoPage(),
+        'scrollPage': (BuildContext context) => ScrollPage(),
+        'botones': (BuildContext context) => BotonesPage(),
       },
     );
   }
