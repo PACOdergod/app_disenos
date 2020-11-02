@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ScrollPage extends StatelessWidget {
+  static final String routName = 'scrollPage';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

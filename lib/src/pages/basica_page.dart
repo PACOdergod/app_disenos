@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BasicoPage extends StatelessWidget {
+  static final String routName = 'basicoPage';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

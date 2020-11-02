@@ -13,11 +13,11 @@ class MyApp extends StatelessWidget {
         SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.black));
     return MaterialApp(
       title: 'Diseños',
-      initialRoute: '/botones',
+      initialRoute: BotonesPage.routName,
       routes: {
-        '/basico': (BuildContext context) => BasicoPage(),
-        '/scroll': (BuildContext context) => ScrollPage(),
-        '/botones': (BuildContext context) => BotonesPage(),
+        BasicoPage.routName: (BuildContext context) => BasicoPage(),
+        ScrollPage.routName: (BuildContext context) => ScrollPage(),
+        BotonesPage.routName: (BuildContext context) => BotonesPage(),
       },
     );
   }
