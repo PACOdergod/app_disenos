@@ -8,20 +8,20 @@ class BotonesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-          children: <Widget>[
-            _fondo(),
-            SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  _titulo(),
-                  _botones(context),
-                ],
-              ),
-            )
-          ],
-        ),
-        bottomNavigationBar: _navigation(context));
+      body: Stack(
+        children: <Widget>[
+          _fondo(),
+          SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                _titulo(),
+                _botones(context),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Widget _fondo() {
@@ -89,30 +89,16 @@ class BotonesPage extends StatelessWidget {
     );
   }
 
-  Widget _navigation(context) {
-    return Theme(
-        data: Theme.of(context).copyWith(
-            canvasColor: Colors.indigo[300],
-            primaryColor: Colors.pinkAccent,
-            textTheme: Theme.of(context)
-                .textTheme
-                .copyWith(caption: TextStyle(color: Colors.grey))),
-        child: BottomNavigationBar(items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.bubble_chart), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.access_time), label: ''),
-        ]));
-  }
-
   Widget _botones(
     BuildContext context,
   ) {
     return Table(
       children: [
         TableRow(children: [
-          _crearBoton(context, 'basicoPage', Icons.access_alarm, Colors.blue),
           _crearBoton(
-              context, 'scrollPage', Icons.accessibility, Colors.purple),
+              context, 'Pagina basica', Icons.access_alarm, Colors.blue),
+          _crearBoton(
+              context, 'Pagina Scroll', Icons.accessibility, Colors.purple),
         ]),
         TableRow(children: [
           _crearBoton(context, 'Copo', Icons.ac_unit, Colors.blue[200]),
@@ -128,48 +114,45 @@ class BotonesPage extends StatelessWidget {
   }
 
   Widget _crearBoton(context, String texto, IconData icono, Color color) {
-    List<String> textos = ['basicoPage', 'scrollPage'];
+    List<String> textos = ['Pagina basica', 'Pagina Scroll'];
+
     return GestureDetector(
-      onTap: () {
-        if (textos.contains(texto)) {
-          Navigator.pushNamed(context, texto);
-        } else {
-          Scaffold.of(context).showSnackBar(
-            SnackBar(
-              content: Text("Hola, soy SnackBar"),
-            ),
-          );
-        }
-      },
-      child: ClipRRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
-          child: Container(
-            height: 180,
-            margin: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-                color: Color.fromRGBO(62, 66, 107, 0.7),
-                borderRadius: BorderRadius.circular(20)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 30,
-                  backgroundColor: color,
-                  child: Icon(
-                    icono,
-                    size: 30,
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  texto,
-                  style: TextStyle(color: color, fontSize: 20),
-                )
-              ],
+        onTap: () {
+          if (textos.contains(texto)) {
+            Navigator.pushNamed(context, texto);
+          } else {
+            final snackBar = SnackBar(content: Text('Yay! A SnackBar!'));
+
+            Scaffold.of(context).showSnackBar(snackBar);
+          }
+        },
+        child: _contenidoBotones(texto, icono, color));
+  }
+
+  Widget _contenidoBotones(String texto, IconData icono, Color color) {
+    return Container(
+      height: 180,
+      margin: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+          color: Color.fromRGBO(62, 66, 107, 0.7),
+          borderRadius: BorderRadius.circular(20)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          CircleAvatar(
+            radius: 30,
+            backgroundColor: color,
+            child: Icon(
+              icono,
+              size: 30,
+              color: Colors.white,
             ),
           ),
-        ),
+          Text(
+            texto,
+            style: TextStyle(color: color, fontSize: 20),
+          )
+        ],
       ),
     );
   }

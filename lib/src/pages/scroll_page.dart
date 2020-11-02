@@ -20,6 +20,11 @@ class ScrollPage extends StatelessWidget {
         Container(
           height: double.infinity,
           width: double.infinity,
+          color: Color.fromRGBO(108, 192, 218, 1.0),
+        ),
+        Container(
+          height: double.infinity,
+          width: double.infinity,
           child: Image(
             image: AssetImage('assets/scroll-1.png'),
             fit: BoxFit.cover,

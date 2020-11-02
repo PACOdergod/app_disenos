@@ -20,7 +20,9 @@ class BasicoPage extends StatelessWidget {
   }
 
   Widget _imagen() {
-    return Image(
+    return FadeInImage(
+        height: 250.0,
+        placeholder: AssetImage('assets/loading.gif'),
         image: NetworkImage(
             'https://astelus.com/wp-content/viajes/Lago-Moraine-Parque-Nacional-Banff-Alberta-Canada.jpg'));
   }
