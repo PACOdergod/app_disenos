@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class BotonesPage extends StatelessWidget {
-  static final String routName = 'botones';
+  static final String routName = 'home';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
